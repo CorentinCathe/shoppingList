@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+{{form_start(formArticle)}}
+<div class="col-4">
+    {{form_widget(formArticle)}}
+</div>
+<button type="submit" class="btn btn-success"><i class="fa fa-plus"></i></button>
+{{form_end(formArticle)}}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">
+                #
+            </th>
+            <th scope="col">
+                Article
+            </th>
+            <th scope="col">
+                nombre
+            </th>
+            <th scope="col">
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for article in articleList %}
+
+
+
+        <tr {% if article.isCheck %} style="background-color: #EB605D;" {% endif %}>
+            <th scope="row">
+                {{ loop.index }}
+            </th>
+            <td>
+                {{article.name}}
+            </td>
+            <td>
+                {{article.nbArticle}}
+            </td>
+            <td>
+                <a href="{{path('remove', {id:article.id})}}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                <a href="{{path('check', {id:article.id})}}" class="btn btn-primary"><i class="fas fa-check"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock body %}
